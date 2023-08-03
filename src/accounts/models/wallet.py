@@ -13,3 +13,13 @@ class Wallet(BaseModel):
 
     def __str__(self) -> str:
         return f"{self.user.get_full_name()} - {self.amount}"
+
+    def charge_wallet(self, amount: int) -> int:
+        self.amount += amount
+        self.save()
+        return self.amount
+
+    def decreasing_wallet(self, amount: int) -> int:
+        self.amount -= amount
+        self.save()
+        return self.amount
