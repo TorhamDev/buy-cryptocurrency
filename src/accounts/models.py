@@ -15,6 +15,12 @@ phone_regex = RegexValidator(
 
 
 class User(AbstractBaseUser, PermissionsMixin):
+    """
+    Users within the system are represented by this model.
+
+    phone_number and password are required. Other fields are optional.
+    """
+
     phone_number = models.CharField(
         _("phone number"),
         validators=[phone_regex],
