@@ -32,6 +32,10 @@ AUTH_USER_MODEL = "accounts.User"
 # Application definition
 LOCAL_APPS = ["accounts"]
 
+THIRD_PARTY_APPS = [
+    "rest_framework",
+    "rest_framework_simplejwt",
+]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -41,6 +45,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     *LOCAL_APPS,
+    *THIRD_PARTY_APPS,
 ]
 
 MIDDLEWARE = [
