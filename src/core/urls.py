@@ -22,6 +22,7 @@ token_urlpatterns = [
 
 api_urlpatterns = [
     path("accounts/", include("accounts.api.urls")),
+    path("cryptos/", include("cryptos.api.urls"))
 ]
 
 urlpatterns = [
