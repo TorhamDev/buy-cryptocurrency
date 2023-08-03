@@ -7,6 +7,12 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "core.settings")
 
 app = Celery("core")
 
+app.conf.beat_schedule = {
+    "run-me-every-ten-seconds": {
+        "task": "cryptos.tasks.sleepy",
+        "schedule": 10.0,
+    }
+}
 # Using a string here means the worker doesn't have to serialize
 # the configuration object to child processes.
 # - namespace='CELERY' means all celery-related configuration keys
