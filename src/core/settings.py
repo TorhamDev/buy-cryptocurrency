@@ -32,6 +32,7 @@ AUTH_USER_MODEL = "accounts.User"
 # Application definition
 LOCAL_APPS = [
     "accounts",
+    "cryptos",
 ]
 
 THIRD_PARTY_APPS = [
