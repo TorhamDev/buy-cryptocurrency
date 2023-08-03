@@ -20,9 +20,14 @@ token_urlpatterns = [
     path("refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 ]
 
+api_urlpatterns = [
+    path("accounts/", include("accounts.urls")),
+]
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("token/", include(token_urlpatterns)),
+    path("api/", include(api_urlpatterns)),
 ]
 
 urlpatterns += document_urlpatterns if settings.DEBUG else ...
