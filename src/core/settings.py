@@ -25,16 +25,19 @@ SECRET_KEY = "django-insecure-4y=4nc1qy7(6sh-k-hzs6xn4kggfj1=evf9*tojc3i1fs7y##2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 AUTH_USER_MODEL = "accounts.User"
 
 # Application definition
-LOCAL_APPS = ["accounts"]
+LOCAL_APPS = [
+    "accounts",
+]
 
 THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
+    "drf_spectacular",
 ]
 
 INSTALLED_APPS = [
@@ -77,6 +80,13 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "core.wsgi.application"
+
+REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ],
+}
 
 
 # Database
