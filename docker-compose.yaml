@@ -28,6 +28,7 @@ services:
       CELERY_BROKER_URL: 'redis://redis:6379'
       CELERY_RESULT_BACKEND: 'redis://redis:6379'
       SECRET_KEY: 'django-insecure-4y=4nc1qy7(6sh-k-hzs6xn4kggfj1=evf9*tojc3i1fs7y##2'
+      DEBUG: 1
     volumes:
       - .:/src
     ports:

@@ -14,8 +14,5 @@ class Crypto(BaseModel):
     sale_price = models.BigIntegerField("Crypto sales price")
     logo = models.ImageField("Crypto logo", null=True, blank=True)
 
-    created_at = models.DateTimeField(("date joined"), auto_now_add=True)
-    update_at = models.DateTimeField(("update date"), auto_now=True)
-
     def __str__(self) -> str:
         return f"{self.name}-{self.abbreviation}"

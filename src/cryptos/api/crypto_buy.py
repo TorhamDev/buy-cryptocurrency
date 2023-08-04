@@ -25,6 +25,13 @@ class BuyCryptoAPI(APIView):
 
     @extend_schema(request=BuyCryptoInputSerializer)
     def post(self, request) -> Response:
+        """
+        This api is responsible for purchasing cryptocurrency for users.
+        After the purchase,
+        the balance will be deducted from the user's account
+        and a purchase record will be created so that it can be dealt with as soon as possible.
+        """
+
         serializer = self.BuyCryptoInputSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
@@ -43,6 +50,6 @@ class BuyCryptoAPI(APIView):
                 c_amount=amount,
                 price=price_to_buy,
             )
-            return Response({"data": price_to_buy})
+            return Response({"price": price_to_buy})
 
         raise InsufficientWalletBalance

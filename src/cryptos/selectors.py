@@ -31,9 +31,9 @@ def calcualte_buy_records_to_exchange(buy_records: list[bytes]) -> dict[int, int
         input:
             {"tether":2, "tether":1, "ABAN":5}
         retrun :
-            {"tether":3, "ABAN":5, "all_price":16}
+            {"tether":3, "ABAN":5, "all_prices":16}
     """
-    records = {"all_price":0}
+    records = {"all_prices": 0}
     for record in buy_records:
         record = json_loads(record.decode("utf-8").replace("'", '"'))
         crypto = record["crypto_name"]
@@ -42,7 +42,7 @@ def calcualte_buy_records_to_exchange(buy_records: list[bytes]) -> dict[int, int
             records[crypto] = crypto_buy_amount
         else:
             records[crypto] += crypto_buy_amount
-        records["all_price"] += record["price_to_buy"]
+        records["all_prices"] += record["price_to_buy"]
 
     return records
 

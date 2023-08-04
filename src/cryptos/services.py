@@ -1,4 +1,5 @@
 from uuid import uuid4
+from typing_extensions import Any
 
 from utils.redis_db import get_redis_connection
 from accounts.models import User
@@ -25,21 +26,21 @@ def buy_crypto_for_user(
     create_buy_record(buy_record)
 
 
-def create_buy_record(buy_record: dict) -> bool:
+def create_buy_record(buy_record: dict) -> int:
     """saving buy record to Redis events list"""
     return redis_db.rpush("purchases", str(buy_record))
 
 
-def remove_exchanged_buy_records(buy_records: list[bytes]):
+def remove_exchanged_buy_records(buy_records: list[bytes]) -> None:
     """removeing exchanged events from Redis events list"""
     for record_index in buy_records:
         redis_db.lrem("purchases", 1, record_index)
 
 
-def buy_from_exchange(**kwargs):
+def buy_from_exchange(**kwargs: dict[Any, Any]) -> bool:
     """Exchanging cryptos..."""
 
-    if kwargs["all_price"] >= 10:
+    if kwargs["all_prices"] >= 10:
         # sending request to exchanger ....
         return True
 

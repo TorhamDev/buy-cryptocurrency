@@ -4,6 +4,7 @@ from cryptos.models import Crypto
 
 class CryptoAdmin(admin.ModelAdmin):
     list_display = (
+        "id",
         "name",
         "abbreviation",
         "purchase_price",

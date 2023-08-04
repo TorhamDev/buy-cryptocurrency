@@ -46,18 +46,16 @@ class UserRegisterAPI(APIView):
         Create a User with post method
         """
 
-        req_data = request.data
-
-        input_serializer = self.UserRegisterInputSerializer(data=req_data)
+        input_serializer = self.UserRegisterInputSerializer(data=request.data)
 
         input_serializer.is_valid(raise_exception=True)
-        data = input_serializer.validated_data
+        validated_data = input_serializer.validated_data
 
-        output_serializer = self.UserRegisterOutputSerializer(
-            instance=create_user(
-                phone_number=data.get("phone_number"),
-                password=data.get("password"),
-            )
+        user = create_user(
+            phone_number=validated_data.get("phone_number"),
+            password=validated_data.get("password"),
         )
+
+        output_serializer = self.UserRegisterOutputSerializer(instance=user)
 
         return Response(output_serializer.data)

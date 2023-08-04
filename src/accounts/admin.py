@@ -12,6 +12,7 @@ class UserAdmin(admin.ModelAdmin):
     """User admin class for user model in admin panel"""
 
     list_display = (
+        "id",
         "phone_number",
         "date_joined",
         "is_active",
@@ -33,6 +34,7 @@ class WalletAdmin(admin.ModelAdmin):
     """Wallet admin for wallet model in admin panel for showing more data"""
 
     list_display = (
+        "id",
         "user",
         "amount",
         "created_at",
