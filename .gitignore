@@ -159,7 +159,11 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
+### Development
 */media
 celerybeat-schedule.dir
 celerybeat-schedule.dat
 celerybeat-schedule.bak
+**/migrations/**
+!**/migrations
+!**/migrations/__init__.py
