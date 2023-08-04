@@ -32,9 +32,9 @@ class BuyCryptoAPI(APIView):
         if is_user_balance_enough(self.request.user, price_to_buy):
             buy_crypto_for_user(
                 user=self.request.user,
-                crypto_name=crypto_name,
-                crypto_amount=amount,
-                price_to_buy=price_to_buy,
+                c_name=crypto_name,
+                c_amount=amount,
+                price=price_to_buy,
             )
             return Response({"data": price_to_buy})
 

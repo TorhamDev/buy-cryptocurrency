@@ -1,7 +1,7 @@
 from cryptos.models import Crypto
 from utils.exceotions import InvalidCryptoID
 from accounts.models import User
-from ast import literal_eval
+import json
 
 
 def calcualte_crypto_price(crypto_name: int, amount: int) -> int | float:
@@ -12,10 +12,11 @@ def calcualte_crypto_price(crypto_name: int, amount: int) -> int | float:
 
     raise InvalidCryptoID
 
+
 def calcualte_buy_records_to_exchange(buy_records: list[bytes]) -> dict[int, int]:
     records = dict()
     for record in buy_records:
-        record = literal_eval(record.decode())
+        record = json.loads(record.decode("utf-8").replace("'", '"'))
         crypto = record["crypto_name"]
         crypto_buy_amount = record["crypto_amount"]
         if crypto not in records:
