@@ -21,7 +21,7 @@ class Wallet(BaseModel):
     @transaction.atomic
     def charge_wallet(self, amount: int) -> int:
         """Charging user wallet. incresing wallet amount."""
-        wallet = Wallet.objects.select_for_update(nowait=True).get(pk=self.pk)
+        wallet = Wallet.objects.select_for_update().get(pk=self.pk)
         wallet.amount += amount
         wallet.save()
         return wallet.amount
@@ -29,7 +29,7 @@ class Wallet(BaseModel):
     @transaction.atomic
     def decreasing_wallet(self, amount: int) -> int:
         """decoreasing wallet amount."""
-        wallet = Wallet.objects.select_for_update(nowait=True).get(pk=self.pk)
+        wallet = Wallet.objects.select_for_update().get(pk=self.pk)
         wallet.amount -= amount
         wallet.save()
         return wallet.amount
