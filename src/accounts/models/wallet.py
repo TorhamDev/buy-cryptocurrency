@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.db import transaction
 
 from utils.models import BaseModel
 
@@ -17,14 +18,18 @@ class Wallet(BaseModel):
     def __str__(self) -> str:
         return f"{self.user.get_full_name()} - {self.amount}"
 
+    @transaction.atomic
     def charge_wallet(self, amount: int) -> int:
         """Charging user wallet. incresing wallet amount."""
-        self.amount += amount
-        self.save()
-        return self.amount
+        wallet = Wallet.objects.select_for_update(nowait=True).get(pk=self.pk)
+        wallet.amount += amount
+        wallet.save()
+        return wallet.amount
 
+    @transaction.atomic
     def decreasing_wallet(self, amount: int) -> int:
         """decoreasing wallet amount."""
-        self.amount -= amount
-        self.save()
-        return self.amount
+        wallet = Wallet.objects.select_for_update(nowait=True).get(pk=self.pk)
+        wallet.amount -= amount
+        wallet.save()
+        return wallet.amount
