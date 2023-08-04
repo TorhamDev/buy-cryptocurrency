@@ -6,7 +6,7 @@ from drf_spectacular.utils import extend_schema
 
 from utils.exceotions import InsufficientWalletBalance
 from cryptos.selectors import calcualte_crypto_price, is_user_balance_enough
-from cryptos.services import create_buy_record
+from cryptos.services import buy_crypto_for_user
 
 
 class BuyCryptoAPI(APIView):
@@ -30,7 +30,7 @@ class BuyCryptoAPI(APIView):
         )
 
         if is_user_balance_enough(self.request.user, price_to_buy):
-            create_buy_record(
+            buy_crypto_for_user(
                 user=self.request.user,
                 crypto_name=crypto_name,
                 crypto_amount=amount,
