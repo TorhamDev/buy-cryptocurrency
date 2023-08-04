@@ -7,7 +7,12 @@ from cryptos.models import Crypto
 
 
 class CryptosListAPI(APIView):
+    """API to reciveing list of all sellable cryptos"""
     class CryptosListOutputSerializer(serializers.ModelSerializer):
+        """
+        Input serializer for cryptos list API.
+        **only responseble for serializing input data.**
+        """
         class Meta:
             model = Crypto
             fields = "__all__"

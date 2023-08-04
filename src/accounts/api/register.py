@@ -1,11 +1,11 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.request import Request
+from rest_framework import serializers
+from drf_spectacular.utils import extend_schema
 
 from accounts.models import User
-from rest_framework import serializers
 from accounts.services import create_user
-from drf_spectacular.utils import extend_schema
 
 
 class UserRegisterAPI(APIView):
@@ -14,6 +14,11 @@ class UserRegisterAPI(APIView):
     """
 
     class UserRegisterInputSerializer(serializers.ModelSerializer):
+        """
+        Input serializer for register user.
+        **only responseble for serializing input data.**
+        """
+
         password = serializers.CharField()
         confirm_password = serializers.CharField()
 
@@ -22,6 +27,11 @@ class UserRegisterAPI(APIView):
             fields = ("phone_number", "password", "confirm_password")
 
     class UserRegisterOutputSerializer(serializers.ModelSerializer):
+        """
+        Output serializer for register user.
+        **only responseble for serializing output data, without password infos**
+        """
+
         class Meta:
             model = User
             fields = ("phone_number",)

@@ -10,9 +10,16 @@ from cryptos.services import buy_crypto_for_user
 
 
 class BuyCryptoAPI(APIView):
+    """API to buy cryptos"""
+
     permission_classes = (IsAuthenticated,)
 
     class BuyCryptoInputSerializer(serializers.Serializer):
+        """
+        Input serializer for buy cryptos API.
+        **only responseble for serializing input data.**
+        """
+
         crypto_name = serializers.CharField()
         amount = serializers.IntegerField()
 

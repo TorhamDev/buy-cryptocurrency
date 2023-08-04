@@ -1,11 +1,18 @@
+from uuid import uuid4
+
 from utils.redis_db import get_redis_connection
 from accounts.models import User
-from uuid import uuid4
 
 redis_db = get_redis_connection()
 
 
-def buy_crypto_for_user(*, user: User, c_name: int, c_amount: int, price: int | float) -> None:
+def buy_crypto_for_user(
+    *, user: User, c_name: int, c_amount: int, price: int | float
+) -> None:
+    """
+    decreasing user wallet amount and then create a buy record.
+    buy record with be handle with cryptos.tasks.call_exchange task every 30s.
+    """
     user.wallet.decreasing_wallet(price)
 
     buy_record = {
@@ -19,15 +26,19 @@ def buy_crypto_for_user(*, user: User, c_name: int, c_amount: int, price: int | 
 
 
 def create_buy_record(buy_record: dict) -> bool:
+    """saving buy record to Redis events list"""
     return redis_db.rpush("purchases", str(buy_record))
 
 
 def remove_exchanged_buy_records(buy_records: list[bytes]):
+    """removeing exchanged events from Redis events list"""
     for record_index in buy_records:
         redis_db.lrem("purchases", 1, record_index)
 
 
 def buy_from_exchange(**kwargs):
+    """Exchanging cryptos..."""
+
     # sending request to exchanger ....
 
     return True

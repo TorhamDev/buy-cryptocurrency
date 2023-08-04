@@ -5,8 +5,9 @@ from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.core.validators import RegexValidator
 from django.utils.translation import gettext_lazy as _
-from accounts.managers import UserManager
 from typing_extensions import Any
+
+from accounts.managers import UserManager
 
 phone_regex = RegexValidator(
     regex=r"^\+{1}989\d{9}$",

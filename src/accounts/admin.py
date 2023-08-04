@@ -3,10 +3,14 @@ from accounts.models import User, Wallet
 
 
 class WalletInline(admin.TabularInline):
+    """wallet inline for user admin"""
+
     model = Wallet
 
 
 class UserAdmin(admin.ModelAdmin):
+    """User admin class for user model in admin panel"""
+
     list_display = (
         "phone_number",
         "date_joined",
@@ -26,6 +30,8 @@ class UserAdmin(admin.ModelAdmin):
 
 
 class WalletAdmin(admin.ModelAdmin):
+    """Wallet admin for wallet model in admin panel for showing more data"""
+
     list_display = (
         "user",
         "amount",

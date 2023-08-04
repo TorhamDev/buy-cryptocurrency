@@ -4,7 +4,7 @@ typehint:
 
 .PHONY: lint
 lint:
-	pylint --disable=C0114 src/
+	pylint --load-plugins pylint_django --disable=C0114 src/
 
 .PHONY: checklist
 	checklist: lint typehint

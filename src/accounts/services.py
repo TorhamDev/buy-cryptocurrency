@@ -1,5 +1,5 @@
-from accounts.models import User, Wallet
 from django.db.models import QuerySet
+from accounts.models import User, Wallet
 
 
 def create_user(phone_number, password) -> QuerySet:
