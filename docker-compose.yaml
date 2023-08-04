@@ -21,6 +21,13 @@ services:
     restart: always
     build: .
     command: bash -c "python /code/src/manage.py makemigrations --noinput && python /code/src/manage.py migrate --noinput && python /code/src/manage.py runserver 0.0.0.0:8000"
+    environment:
+      REDIS_HOST: 'redis'
+      REDIS_PORT: 6379
+      REDIS_DB: 0
+      CELERY_BROKER_URL: 'redis://redis:6379'
+      CELERY_RESULT_BACKEND: 'redis://redis:6379'
+      SECRET_KEY: 'django-insecure-4y=4nc1qy7(6sh-k-hzs6xn4kggfj1=evf9*tojc3i1fs7y##2'
     volumes:
       - .:/src
     ports:
