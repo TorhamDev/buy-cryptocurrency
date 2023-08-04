@@ -39,6 +39,8 @@ def remove_exchanged_buy_records(buy_records: list[bytes]):
 def buy_from_exchange(**kwargs):
     """Exchanging cryptos..."""
 
-    # sending request to exchanger ....
+    if kwargs["all_price"] >= 10:
+        # sending request to exchanger ....
+        return True
 
-    return True
+    return False
