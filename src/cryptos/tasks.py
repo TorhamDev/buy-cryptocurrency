@@ -1,11 +1,16 @@
 from celery import shared_task
 from utils.redis_db import get_redis_connection
-from random import randint
+
+from cryptos.services import buy_from_exchange, remove_exchanged_buy_records
+from cryptos.selectors import calcualte_buy_records_to_exchange
 
 redis_db = get_redis_connection()
 
 
 @shared_task
-def sleepy():
-    redis_db.set("random", randint(1, 50))
-    redis_db.expire("random", 20)
+def call_exchange():
+    buy_records = redis_db.lrange("purchases", 0, -1)
+    records_to_exchabge = calcualte_buy_records_to_exchange(buy_records)
+    exchange = buy_from_exchange(**records_to_exchabge)
+    if exchange:
+        remove_exchanged_buy_records(buy_records)

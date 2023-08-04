@@ -8,8 +8,8 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "core.settings")
 app = Celery("core")
 
 app.conf.beat_schedule = {
-    "run-me-every-ten-seconds": {
-        "task": "cryptos.tasks.sleepy",
+    "exchange-every-30-seconds": {
+        "task": "cryptos.tasks.call_exchange",
         "schedule": 10.0,
     }
 }
