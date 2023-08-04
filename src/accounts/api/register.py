@@ -13,7 +13,7 @@ class UserRegisterAPI(APIView):
     Registering user with phone number and password into db.
     """
 
-    class InputSerializer(serializers.ModelSerializer):
+    class UserRegisterInputSerializer(serializers.ModelSerializer):
         password = serializers.CharField()
         confirm_password = serializers.CharField()
 
@@ -21,12 +21,14 @@ class UserRegisterAPI(APIView):
             model = User
             fields = ("phone_number", "password", "confirm_password")
 
-    class OutputSerializer(serializers.ModelSerializer):
+    class UserRegisterOutputSerializer(serializers.ModelSerializer):
         class Meta:
             model = User
             fields = ("phone_number",)
 
-    @extend_schema(request=InputSerializer, responses=OutputSerializer)
+    @extend_schema(
+        request=UserRegisterInputSerializer, responses=UserRegisterOutputSerializer
+    )
     def post(self, request: Request) -> Response:
         """
         *notice*: **this view is only for test and it's need a lot of validations!**
@@ -36,12 +38,12 @@ class UserRegisterAPI(APIView):
 
         req_data = request.data
 
-        input_serializer = self.InputSerializer(data=req_data)
+        input_serializer = self.UserRegisterInputSerializer(data=req_data)
 
         input_serializer.is_valid(raise_exception=True)
         data = input_serializer.validated_data
 
-        output_serializer = self.OutputSerializer(
+        output_serializer = self.UserRegisterOutputSerializer(
             instance=create_user(
                 phone_number=data.get("phone_number"),
                 password=data.get("password"),

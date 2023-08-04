@@ -12,13 +12,13 @@ from cryptos.services import buy_crypto_for_user
 class BuyCryptoAPI(APIView):
     permission_classes = (IsAuthenticated,)
 
-    class InputSerializer(serializers.Serializer):
+    class BuyCryptoInputSerializer(serializers.Serializer):
         crypto_name = serializers.CharField()
         amount = serializers.IntegerField()
 
-    @extend_schema(request=InputSerializer)
+    @extend_schema(request=BuyCryptoInputSerializer)
     def post(self, request) -> Response:
-        serializer = self.InputSerializer(data=request.data)
+        serializer = self.BuyCryptoInputSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
         crypto_name = serializer.validated_data.get("crypto_name")

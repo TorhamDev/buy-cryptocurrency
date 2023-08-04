@@ -7,15 +7,15 @@ from cryptos.models import Crypto
 
 
 class CryptosListAPI(APIView):
-    class OutputSerializer(serializers.ModelSerializer):
+    class CryptosListOutputSerializer(serializers.ModelSerializer):
         class Meta:
             model = Crypto
             fields = "__all__"
 
-    @extend_schema(responses=OutputSerializer)
+    @extend_schema(responses=CryptosListOutputSerializer)
     def get(self, request):
         cryptos = Crypto.objects.all()
-        serializer = self.OutputSerializer(
+        serializer = self.CryptosListOutputSerializer(
             instance=cryptos,
             many=True,
             context={"request": request},
