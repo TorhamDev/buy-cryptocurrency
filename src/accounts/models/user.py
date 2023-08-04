@@ -6,6 +6,7 @@ from django.contrib.auth.base_user import AbstractBaseUser
 from django.core.validators import RegexValidator
 from django.utils.translation import gettext_lazy as _
 from accounts.managers import UserManager
+from typing_extensions import Any
 
 phone_regex = RegexValidator(
     regex=r"^\+{1}989\d{9}$",
@@ -37,7 +38,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = "phone_number"
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS: list[Any] = []
 
     class Meta:
         verbose_name = _("user")

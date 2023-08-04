@@ -27,5 +27,5 @@ def calcualte_buy_records_to_exchange(buy_records: list[bytes]) -> dict[int, int
     return records
 
 
-def is_user_balance_enough(user: User, amount_to_buy: int) -> bool:
+def is_user_balance_enough(user: User, amount_to_buy: int | float) -> bool:
     return user.wallet.amount >= amount_to_buy

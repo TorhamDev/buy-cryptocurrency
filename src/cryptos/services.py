@@ -5,7 +5,7 @@ from uuid import uuid4
 redis_db = get_redis_connection()
 
 
-def buy_crypto_for_user(*, user: User, c_name: int, c_amount: int, price: int) -> bool:
+def buy_crypto_for_user(*, user: User, c_name: int, c_amount: int, price: int | float) -> None:
     user.wallet.decreasing_wallet(price)
 
     buy_record = {

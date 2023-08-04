@@ -22,7 +22,7 @@ token_urlpatterns = [
 
 api_urlpatterns = [
     path("accounts/", include("accounts.api.urls")),
-    path("cryptos/", include("cryptos.api.urls"))
+    path("cryptos/", include("cryptos.api.urls")),
 ]
 
 urlpatterns = [
@@ -31,4 +31,6 @@ urlpatterns = [
     path("api/", include(api_urlpatterns)),
 ]
 
-urlpatterns += document_urlpatterns if settings.DEBUG else ...
+
+if settings.DEBUG:
+    urlpatterns += document_urlpatterns
