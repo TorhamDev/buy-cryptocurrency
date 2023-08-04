@@ -3,6 +3,7 @@
 ![DjangoREST](https://img.shields.io/badge/django%20rest-ff1709?style=for-the-badge&logo=django&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)
+![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=white)
 
 # Buy-cryptocurrency
 A simple cryptocurrency purchase system :)
@@ -34,6 +35,8 @@ docker-compose up -d
 
 # enjoy :)
 ```
+## Document
+**To see the project document, after running it, go to the `/redoc` or `/docs` path and view the document**
 
 ## License
 
