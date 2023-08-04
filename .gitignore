@@ -160,3 +160,6 @@ cython_debug/
 #.idea/
 
 */media
+celerybeat-schedule.dir
+celerybeat-schedule.dat
+celerybeat-schedule.bak
