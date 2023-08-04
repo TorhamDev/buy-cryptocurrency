@@ -6,3 +6,5 @@ drf-spectacular==0.26.4
 Pillow==10.0.0
 redis==4.6.0
 typing_extensions==4.7.1
+mysqlclient==2.2.0
+PyMySQL==1.1.0

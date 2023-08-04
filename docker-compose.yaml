@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'db'
+      MYSQL_PASSWORD: 'mysql'
+      MYSQL_ROOT_PASSWORD: 'mysql'
+    ports:
+      - '3306:3306'
+    volumes:
+      - /var/lib/mysql:/var/lib/mysql
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - '6379:6379'
+  web:
+    restart: always
+    build: .
+    command: bash -c "python /code/src/manage.py makemigrations --noinput && python /code/src/manage.py migrate --noinput && python /code/src/manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/src
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+  celery:
+    restart: always
+    build: .
+    command: bash -c "cd /code/src/ && celery -A core worker -l info"
+    volumes:
+      - .:/src
+    depends_on:
+      - db
+      - redis
+  celery-beat:
+    restart: always
+    build: .
+    command: bash -c "cd /code/src/ && celery -A core beat -l info"
+    volumes:
+      - .:/src
+    depends_on:
+      - db
+      - redis
+
+volumes:
+  my-db:
