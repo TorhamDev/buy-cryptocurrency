@@ -48,14 +48,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self) -> str:
         return f"{self.phone_number} - {self.get_full_name()}"
 
-    def get_full_name(self):
+    def get_full_name(self) -> str:
         """
         Returns the first_name plus the last_name, with a space in between.
         """
         full_name = f'{self.first_name or ""} {self.last_name or ""}'
         return full_name.strip()
 
-    def get_short_name(self):
+    def get_short_name(self) -> str:
         """
         Returns the short name for the user.
         """
