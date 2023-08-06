@@ -1,7 +1,7 @@
 from json import loads as json_loads
 
 from cryptos.models import Crypto
-from utils.exceotions import InvalidCryptoID
+from utils.exceptions import InvalidCryptoID
 from accounts.models import User
 
 

@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from drf_spectacular.utils import extend_schema
 
-from utils.exceotions import InsufficientWalletBalance
+from utils.exceptions import InsufficientWalletBalance
 from cryptos.selectors import calcualte_crypto_price, is_user_balance_enough
 from cryptos.services import buy_crypto_for_user
 
